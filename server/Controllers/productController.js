@@ -43,10 +43,10 @@ module.exports.readSellerProducts = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const {id, filename} = req.file;
-    const {productId} = req.body;
+    const {productId, name, price, quantity} = req.body;
 
-    // console.log(req.file, "UWOOHH")
-    // console.log({productId}, "SEGGSS")
+    console.log("jere");
+    console.log(filename, "ASDNLKASDLJKASLKHDLH");
 
     const product = await Product.find({"_id": productId});
     const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName: 'uploads'});
@@ -57,7 +57,10 @@ module.exports.update = async (req, res) => {
         const updatedProduct = await Product.findOneAndUpdate({"_id": productId}, {
             $set: {
                 "imgId": id,
-                "imgUrl": imgUrl
+                "imgUrl": imgUrl,
+                "name": name,
+                "price": price,
+                "quantity": quantity
             }
         }, {new: true})
 

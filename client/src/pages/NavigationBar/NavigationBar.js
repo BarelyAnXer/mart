@@ -6,6 +6,29 @@ export default function NavigationBar() {
 
     const {user, setUser} = useContext(UserContext);
 
+    useEffect(() => {
+        console.log(user);
+    }, [])
+
+    const renderSellerBuyerMenu = () => {
+        if (user === null) {
+            return (
+                <></>
+            )
+        } else {
+            if (user.accType === "Buyer") {
+                return (
+                    <Nav.Link href="/cart">Cart</Nav.Link>
+                )
+            } else if (user.accType === "Seller") {
+                return (
+                    <Nav.Link href="/crud">Crud</Nav.Link>
+                )
+            }
+        }
+    }
+
+
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -17,15 +40,16 @@ export default function NavigationBar() {
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/viewProducts">View Products</Nav.Link>
                             <Nav.Link href="/aboutUs">Abouts Us</Nav.Link>
+
+
+                            {/*{renderSellerBuyerMenu()}*/}
                             <Nav.Link href="/crud">Crud</Nav.Link>
                             <Nav.Link href="/cart">Cart</Nav.Link>
-                            {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">*/}
-                            {/*    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Divider/>*/}
-                            {/*    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                            {/*</NavDropdown>*/}
+
+                            <Nav.Link href="/receive">To Receive</Nav.Link>
+                            <Nav.Link href="/ship">To Ship</Nav.Link>
+
+
                         </Nav>
                         <Nav>
                             {
@@ -50,5 +74,5 @@ export default function NavigationBar() {
                 </Container>
             </Navbar>
         </>
-    )
+    );
 }

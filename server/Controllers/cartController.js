@@ -63,7 +63,13 @@ module.exports.deleteCartItem = async (req, res) => {
         console.log(error);
         res.send(error);
     }
+}
 
+module.exports.completePurchase = async (req, res) => {
+    // const {shippingId, productId, sellerId, userId} = req.body;
+
+
+    res.status(200).send("test");
 
 }
 

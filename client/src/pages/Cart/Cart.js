@@ -252,11 +252,47 @@ export default function Cart() {
         const user = JSON.parse(localStorage.getItem("user"));
         const uid = user._id;
 
-        console.log(cartItemId);
-
         fetch("/deleteCartItem", {
             method: "POST",
             body: JSON.stringify({"cartItemId": cartItemId, "uid": uid}),
+            headers: {"Content-Type": "application/json"},
+        }).then(response => response.json()).then(data => {
+            setCartItems(data);
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
+    const updateCartQuantity = (event) => {
+        event.preventDefault();
+
+
+    }
+
+    const computePrice = () => {
+        let computedPrice = 0;
+
+        if (cartItems === null) {
+            return <p>loading</p>
+        }
+
+
+        for (const cartItem of cartItems) {
+            computedPrice = computedPrice + (cartItem[1].price * cartItem[0].quantity);
+        }
+
+        return (
+            <strong>${computedPrice}</strong>
+        )
+    };
+
+    const completePurchase = (event) => {
+        event.preventDefault();
+        console.log("test");
+
+        fetch("/", {
+            method: "POST",
+            body: JSON.stringify({}),
             headers: {"Content-Type": "application/json"},
         }).then(response => response.json()).then(data => {
             setCartItems(data);
@@ -311,7 +347,8 @@ export default function Cart() {
                                             <td/>
                                             <td>{cartItem[1].price}</td>
                                             <td>
-                                                <input type="number" defaultValue={cartItem[0].quantity} aria-label="Search"
+                                                <input type="number" defaultValue={cartItem[0].quantity}
+                                                       aria-label="Search"
                                                        className="form-control"
                                                        style={{width: '100px', margin: "0 auto"}}/>
                                             </td>
@@ -322,17 +359,15 @@ export default function Cart() {
                                                         name={cartItem[0]._id}
                                                         onClick={deleteCartItem}>Delete
                                                 </button>
-                                                {/*<button type="button" className="btn btn-sm btn-primary"*/}
-                                                {/*        data-toggle="tooltip"*/}
-                                                {/*        data-placement="top" title="Remove item">Save*/}
-                                                {/*</button>*/}
                                                 <button type="button" className="btn btn-sm btn-primary"
                                                         data-toggle="tooltip"
-                                                        data-placement="top" title="Remove item">Update
+                                                        data-placement="top" title="Remove item"
+                                                        name={cartItem[0]._id}
+                                                        onClick={updateCartQuantity}>Update
                                                 </button>
                                             </td>
                                         </tr>
-                                    )
+                                    );
                                 })
                                 :
                                 <></>
@@ -346,14 +381,17 @@ export default function Cart() {
                                         <strong>Total</strong>
                                     </h4>
                                 </td>
+
+
                                 <td className="text-right">
                                     <h4 className="mt-2">
-                                        <strong>$2600</strong>
+                                        {computePrice()}
                                     </h4>
                                 </td>
 
                                 <td colSpan={3} className="text-right">
-                                    <button type="button" className="btn btn-primary btn-rounded">Complete purchase
+                                    <button type="button" className="btn btn-primary btn-rounded"
+                                            onClick={completePurchase}>Complete purchase
                                         <i className="fas fa-angle-right right"/>
                                     </button>
                                 </td>
@@ -361,6 +399,7 @@ export default function Cart() {
                             </tbody>
                         </table>
                     </div>
+
 
                     <div className="pt-3">
                         <DropdownButton title="Location">

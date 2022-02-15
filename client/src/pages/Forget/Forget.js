@@ -5,8 +5,8 @@ export default function Forget() {
         <>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-lg-6 col-md-6 form-container">
-                        <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box">
+                    <div className="col-lg-6 col-md-6 formContainer">
+                        <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 formBox">
                             <div className="logo mt-5 mb-3 text-center">
                                 <img src={logo} width="150px" alt=""/>
                             </div>
@@ -16,7 +16,7 @@ export default function Forget() {
                                     <p className="mb-3 text-white">
                                         Please enter your email address and we will send you a password reset link
                                     </p>
-                                    <div className="form-input">
+                                    <div className="formInput">
                                         <span><i className="fa fa-envelope"/></span>
                                         <input type="email" placeholder="Email Address" required/>
                                     </div>
@@ -38,7 +38,7 @@ export default function Forget() {
                             </div>d
                         </div>
                     </div>
-                    <div className="col-lg-6 col-md-6 d-none d-md-block image-container"/>
+                    <div className="col-lg-6 col-md-6 d-none d-md-block imageContainer"/>
                 </div>
             </div>
 

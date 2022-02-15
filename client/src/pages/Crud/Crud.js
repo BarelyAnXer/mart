@@ -2,6 +2,8 @@ import {FaPlus,} from "react-icons/fa";
 import {useEffect, useState} from "react";
 import CustomModal from "../../Components/CustomModal";
 import {ProductRow} from "./Row";
+import {Modal} from "react-bootstrap";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 
 export default function Crud() {
     // TODO MAY RESPONSIVE TABLE SA BOOSTRAP ???
@@ -11,7 +13,8 @@ export default function Crud() {
     const [quantity, setQuantity] = useState("");
 
     const [products, setProducts] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -42,7 +45,7 @@ export default function Crud() {
             headers: {"Content-Type": "application/json"},
         }).then(response => response.json()).then(data => {
             setProducts(data)
-            setModalShow(true);
+            setShowModal(true);
         }).catch(error => {
             console.log(error)
         });
@@ -59,11 +62,15 @@ export default function Crud() {
         const user = JSON.parse(localStorage.getItem("user"));
         const uid = user._id;
 
-        console.log(typeof price)
-        if (typeof price !== "number") {
-            setModalShow(true);
 
+        console.log(typeof price == "number", typeof quantity !== "number", formData.get("image") == null)
+
+        if (typeof price == "number" || typeof quantity !== "number" || formData.get("image") == null) {
+            setHasError(true);
+            setShowModal(true);
+            return
         }
+
 
         formData.append('name', name);
         formData.append('price', price);
@@ -81,7 +88,7 @@ export default function Crud() {
         }).then(response => response.json()).then(data => {
             console.log(data)
             setProducts(data);
-            setModalShow(true);
+            setShowModal(true);
         }).catch(error => {
             console.log(error)
         });
@@ -100,9 +107,63 @@ export default function Crud() {
     return (
         <>
 
-            <CustomModal show={modalShow} hide={() => setModalShow(false)}/>
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="md"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Message
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    {hasError ?
+                        (
+                            <>
+                                <AiOutlineClose style={{
+                                    fontSize: "3rem",
+                                    color: "red"
+                                }}/>
+                            </>
+                        ) : (
+                            <>
+                                <AiOutlineCheck style={{
+                                    fontSize: "3rem",
+                                    color: "green"
+                                }}/>
+                            </>
+                        )
+                    }
+                    <p style={{
+                        fontSize: "1.5rem"
+                    }}>
+                        {hasError ?
+                            (
+                                <>
+                                    Check your inputted data
+                                    price and quantity must be a number,
+                                    and complete all form
+                                </>
+                            ) : (
+                                <>
+                                    SuccessFully Created
+                                </>
+                            )
+                        }
+                    </p>
+                </Modal.Body>
+            </Modal>
 
-            <div className="container-lg">
+
+            <div className="container-lg" style={{
+                marginBottom: "2.5rem"
+            }}>
                 <div className="table-responsive">
                     <div className="table-wrapper">
                         <div className="table-title">

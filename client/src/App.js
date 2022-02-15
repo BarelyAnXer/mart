@@ -16,6 +16,8 @@ import Seller from "./pages/Seller"
 import Product from "./pages/Product";
 import {UserContext} from "./UserContext";
 import {useMemo, useState} from "react";
+import Receive from "./pages/Receive/Receive";
+import Ship from "./pages/Ship/Ship";
 
 function App() {
 
@@ -43,6 +45,11 @@ function App() {
                         <Route path='/product/:id' element={<Product/>}/>
 
                         <Route path='/seller' element={<Seller/>}/>
+
+
+                        <Route path='/ship' element={<Receive/>}/>
+                        <Route path='/receive' element={<Ship/>}/>
+
 
                         {/*<Route path='/register' element={<Register/>}/>*/}
                     </Routes>

@@ -1,10 +1,14 @@
 import {useState} from "react";
 import {Figure} from "react-bootstrap";
+import CustomModal from "../../Components/CustomModal";
 
 export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,}) {
     const [isEditing, setIsEditing] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const [value, setValue] = useState({_id, name, price, quantity, imgUrl});
+
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const handleChange = (type, event) => {
         setValue((prev) => ({...prev, [type]: event.target.value}));
@@ -14,14 +18,30 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
     const handleFileSelected = (event) => {
         event.preventDefault();
         const files = Array.from(event.target.files)
+        console.log(files[0], "asdladas;ldka;sldka;sldkas");
         formData.append('image', files[0]);
     }
 
     const saveEdit = (event) => {
         event.preventDefault();
 
+        console.log(typeof value.price !== "number");
+        if (value.name === "" || value.price === "" || value.quantity === "") {
+            console.log("asdasda");
+            setIsError(true);
+            setShowEditModal(true);
+            return;
+        } else if (typeof value.price !== "number" || typeof value.quantity !== "number") {
+            console.log("2");
+            return;
+        }
+
+
         const productId = event.target.getAttribute('name');
-        formData.append('productId', productId);
+        formData.append("productId", productId);
+        formData.append("name", value.name);
+        formData.append("price", value.price);
+        formData.append("quantity", value.quantity);
 
         fetch("/update", {
             method: "POST",
@@ -39,6 +59,13 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
 
     return (
         <>
+
+            <CustomModal
+                show={showEditModal}
+                onHide={() => setShowEditModal(false)}
+                isError={isError}
+            />
+
             <tr>
                 <td>{value._id}</td>
                 {isEditing ? (
