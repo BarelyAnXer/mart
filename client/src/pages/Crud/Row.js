@@ -25,16 +25,16 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
     const saveEdit = (event) => {
         event.preventDefault();
 
-        console.log(typeof value.price !== "number");
-        if (value.name === "" || value.price === "" || value.quantity === "") {
-            console.log("asdasda");
-            setIsError(true);
-            setShowEditModal(true);
-            return;
-        } else if (typeof value.price !== "number" || typeof value.quantity !== "number") {
-            console.log("2");
-            return;
-        }
+        // console.log(typeof value.price !== "number");
+        // if (value.name === "" || value.price === "" || value.quantity === "") {
+        //     console.log("asdasda");
+        //     setIsError(true);
+        //     setShowEditModal(true);
+        //     return;
+        // } else if (typeof value.price !== "number" || typeof value.quantity !== "number") {
+        //     console.log("2");
+        //     return;
+        // }
 
 
         const productId = event.target.getAttribute('name');
