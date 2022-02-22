@@ -1,6 +1,6 @@
 import {FaSearch, FaShoppingCart} from "react-icons/fa";
 import {useEffect, useState} from "react";
-import {Figure} from "react-bootstrap";
+import {Button, Figure} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 export default function ViewProducts() {
@@ -35,20 +35,30 @@ export default function ViewProducts() {
 
     return (
         <>
-            <h1>View Products</h1>
+            <h1 style={{
+                marginTop: "20px",
+                fontSize: "3rem"
+            }}>Products</h1>
 
-            {/*SEARCH*/}
-            <div className="input-group md-form form-sm form-2 pl-0">
-                <input className="form-control my-0 py-1 red-border" type="text" placeholder="Search"
-                       aria-label="Search"/>
-                <div className="input-group-append">
-                    <span className="input-group-text red lighten-3" id="basic-text1"><FaSearch/></span>
+            <div style={{
+                maxWidth: "400px",
+                display: "block",
+                margin: "auto"
+            }}>
+                <div className="input-group md-form form-sm form-2 pl-0">
+                    <input className="form-control my-0 py-1 red-border" type="text" placeholder="Search"
+                           aria-label="Search"/>
+                    <div className="input-group-append" style={{
+                        cursor: "pointer"
+                    }}>
+                        <span className="input-group-text red lighten-3" id="basic-text1"><FaSearch/></span>
+                    </div>
                 </div>
             </div>
 
+
             <div className="container my-5">
                 <section>
-                    <h3 className="font-weight-bold text-center dark-grey-text mb-5">New Arrivals</h3>
                     <div className="row">
 
                         {products.map((product) => {
@@ -66,29 +76,30 @@ export default function ViewProducts() {
                                         <div className="card-body">
                                             <h5 className="card-title mb-1">
                                                 <strong>
-                                                    <a href className="dark-grey-text">{product.name}</a>
+                                                    <p style={{}} className="dark-grey-text">{product.name}</p>
                                                 </strong>
                                             </h5>
-                                            <span className="badge badge-danger mb-2">bestseller</span>
 
-                                            <div className="card-footer pb-0">
-                                                <div className="row mb-0">
-                                                    <span className="float-left">
-                                                        <strong>{product.price} $ </strong>
-                                                        {/*<FaShoppingCart/>*/}
+                                            <span className="float-left">
+                                                        <strong style={{
+                                                            color: "#45cbb2",
+                                                        }}>{product.price} ₱ </strong>
+                                                {/*<FaShoppingCart/>*/}
                                                     </span>
-                                                    <br/>
-                                                    <span className="float-left">
-                                                        <strong>View Product</strong>
-                                                        <FaShoppingCart/>
-                                                    </span>
-                                                    <span className="float-left">
-                                                        <Link name={product._id} to={`/product/${product._id}`}
-                                                            // onClick={GOTO}
-                                                        >GOTO</Link>
-                                                    </span>
-                                                </div>
-                                            </div>
+
+                                            <br/>
+
+                                            <Button variant="primary"> <Link name={product._id}
+                                                                             to={`/product/${product._id}`}>
+                                                <strong style={{
+                                                    marginRight: "10px",
+                                                    color: "black",
+                                                }}>View Product</strong>
+                                                <FaShoppingCart style={{
+                                                    color: "black"
+                                                }}/>
+                                            </Link></Button>
+
                                         </div>
                                     </div>
                                 </div>

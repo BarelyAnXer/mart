@@ -1,5 +1,6 @@
 import {BiSupport} from "react-icons/bi";
-
+import {IoAnalytics} from "react-icons/io5"
+import {AiFillPlaySquare} from "react-icons/ai"
 
 export default function Features() {
     return (
@@ -11,7 +12,7 @@ export default function Features() {
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
                     <div className="row">
                         <div className="col-md-4 mb-4">
-                            <i className="fas fa-chart-area fa-3x red-text"/>
+                            <IoAnalytics style={{fontSize: "100px"}}/>
                             <h5 className="font-weight-bold my-4">Analytics</h5>
                             <p className="grey-text mb-md-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Reprehenderit
@@ -27,7 +28,7 @@ export default function Features() {
                             </p>
                         </div>
                         <div className="col-md-4 mb-4">
-                            <i className="far fa-comments fa-3x orange-text"/>
+                            <AiFillPlaySquare style={{fontSize: "100px"}}/>
                             <h5 className="font-weight-bold my-4">Support</h5>
                             <p className="grey-text mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Reprehenderit maiores

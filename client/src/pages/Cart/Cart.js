@@ -1,10 +1,16 @@
 import {useEffect, useState} from "react";
-import {Dropdown, DropdownButton} from "react-bootstrap";
+import {Dropdown, DropdownButton, Modal} from "react-bootstrap";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 
 
 export default function Cart() {
 
     const [cartItems, setCartItems] = useState(null);
+    const [shippingFee, setShippingFee] = useState(0);
+
+    const [showModal, setShowModal] = useState(false);
+    const [hasError, setHasError] = useState(false);
+
 
     const barangays = [
         //120
@@ -263,9 +269,29 @@ export default function Cart() {
         });
     }
 
-    const updateCartQuantity = (event) => {
-        event.preventDefault();
+    // const updateCartQuantity = (event) => {
+    //     event.preventDefault();
+    //
+    //     const cartItemId = event.target.name;
+    //     const user = JSON.parse(localStorage.getItem("user"));
+    //     const uid = user._id;
+    //
+    //     fetch("/updateCartQuantity", {
+    //         method: "POST",
+    //         // body: JSON.stringify({"cartItemId": cartItemId, "uid": uid, "quantity": }),
+    //         headers: {"Content-Type": "application/json"},
+    //     }).then(response => response.json()).then(data => {
+    //         setCartItems(data);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }
 
+    const Fee = (event) => {
+        event.preventDefault();
+        const fee = event.target.getAttribute("name");
+        console.log(fee);
+        setShippingFee(parseInt(fee));
 
     }
 
@@ -273,37 +299,116 @@ export default function Cart() {
         let computedPrice = 0;
 
         if (cartItems === null) {
-            return <p>loading</p>
+            return <p>No Item in Cart</p>
         }
-
 
         for (const cartItem of cartItems) {
             computedPrice = computedPrice + (cartItem[1].price * cartItem[0].quantity);
         }
 
+        computedPrice = computedPrice + shippingFee;
+
         return (
-            <strong>${computedPrice}</strong>
+            <strong>₱{computedPrice}</strong>
         )
     };
 
     const completePurchase = (event) => {
         event.preventDefault();
-        console.log("test");
 
-        fetch("/", {
+
+        if (shippingFee === 0) {
+            setHasError(true);
+            setShowModal(true);
+            return;
+        }
+
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        const uid = user._id;
+
+        fetch("/createOrder", {
             method: "POST",
-            body: JSON.stringify({}),
+            body: JSON.stringify({"buyerId": uid,}),
             headers: {"Content-Type": "application/json"},
         }).then(response => response.json()).then(data => {
             setCartItems(data);
         }).catch(error => {
             console.log(error)
         });
+
+        // fetch("/createHistory", {
+        //     method: "POST",
+        //     body: JSON.stringify({"description": "desc",}),
+        //     headers: {"Content-Type": "application/json"},
+        // }).then(response => response.json()).then(data => {
+        //
+        // }).catch(error => {
+        //     console.log(error)
+        // });
+
+        setHasError(false);
+        setShowModal(true);
+
+
     }
 
 
     return (
         <>
+
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="md"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Message
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    {hasError ?
+                        (
+                            <>
+                                <AiOutlineClose style={{
+                                    fontSize: "3rem",
+                                    color: "red"
+                                }}/>
+                            </>
+                        ) : (
+                            <>
+                                <AiOutlineCheck style={{
+                                    fontSize: "3rem",
+                                    color: "green"
+                                }}/>
+                            </>
+                        )
+                    }
+                    <p style={{
+                        fontSize: "1.5rem"
+                    }}>
+                        {hasError ?
+                            (
+                                <>
+                                    Select a shipping location
+                                </>
+                            ) : (
+                                <>
+                                    Purchase Complete
+                                </>
+                            )
+                        }
+                    </p>
+                </Modal.Body>
+            </Modal>
+
+
             <div className="container my-5 py-3 z-depth-1 rounded">
                 <section className="dark-grey-text">
                     <div className="table-responsive">
@@ -347,10 +452,11 @@ export default function Cart() {
                                             <td/>
                                             <td>{cartItem[1].price}</td>
                                             <td>
-                                                <input type="number" defaultValue={cartItem[0].quantity}
-                                                       aria-label="Search"
-                                                       className="form-control"
-                                                       style={{width: '100px', margin: "0 auto"}}/>
+                                                {/*<input type="number" defaultValue={cartItem[0].quantity}*/}
+                                                {/*       aria-label="Search"*/}
+                                                {/*       className="form-control"*/}
+                                                {/*       style={{width: '100px', margin: "0 auto"}}/>*/}
+                                                <td>{cartItem[0].quantity}</td>
                                             </td>
                                             <td className="d-flex flex-row gap-2 justify-content-center">
                                                 <button type="button" className="btn btn-sm btn-primary"
@@ -359,12 +465,12 @@ export default function Cart() {
                                                         name={cartItem[0]._id}
                                                         onClick={deleteCartItem}>Delete
                                                 </button>
-                                                <button type="button" className="btn btn-sm btn-primary"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top" title="Remove item"
-                                                        name={cartItem[0]._id}
-                                                        onClick={updateCartQuantity}>Update
-                                                </button>
+                                                {/*<button type="button" className="btn btn-sm btn-primary"*/}
+                                                {/*        data-toggle="tooltip"*/}
+                                                {/*        data-placement="top" title="Remove item"*/}
+                                                {/*        name={cartItem[0]._id}*/}
+                                                {/*        onClick={updateCartQuantity}>Update*/}
+                                                {/*</button>*/}
                                             </td>
                                         </tr>
                                     );
@@ -378,7 +484,7 @@ export default function Cart() {
                                 <td colSpan={3}/>
                                 <td>
                                     <h4 className="mt-2">
-                                        <strong>Total</strong>
+                                        <strong>Total: </strong>
                                     </h4>
                                 </td>
 
@@ -401,18 +507,23 @@ export default function Cart() {
                     </div>
 
 
-                    <div className="pt-3">
-                        <DropdownButton title="Location">
-                            {
-                                barangays.map((barangay) => {
-                                    return (
-                                        <Dropdown.Item href="test">{barangay.name}</Dropdown.Item>
-                                    )
-                                })
-                            }
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        </DropdownButton>
+                    <div style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                    }}>
+                        {barangays.map((barangay) => {
+                            return (
+                                <>
+                                    <button type="button" className="btn btn-primary m-2 badge badge-light p-2"
+                                            name={barangay.fee}
+                                            onClick={Fee}>
+                                        {barangay.name}
+                                    </button>
+                                </>
+                            );
+                        })}
                     </div>
+
                 </section>
             </div>
 

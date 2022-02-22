@@ -67,6 +67,7 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
             />
 
             <tr>
+
                 <td>{value._id}</td>
                 {isEditing ? (
                     <>
@@ -133,15 +134,8 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
                             )}
 
                             <span>
-                                     {/*<FaTrash/>*/}
                                 <input type="button" value="delete" name={value._id} onClick={deleteProduct}/>
                                 </span>
-
-
-                            {/*<span>{value.price}</span>*/}
-                            {/*<span>{value.name}</span>*/}
-                            {/*<span>{value.quantity}</span>*/}
-                            {/*<button onClick={() => setIsEditing(true)}>Edit</button>*/}
                         </td>
                     </>
                 )}

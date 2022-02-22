@@ -18,6 +18,9 @@ import {UserContext} from "./UserContext";
 import {useMemo, useState} from "react";
 import Receive from "./pages/Receive/Receive";
 import Ship from "./pages/Ship/Ship";
+import Admin from "./pages/Admin/Admin";
+import SellerHistory from "./pages/SellerHistory/SellerHistory";
+import AdminHistory from "./pages/AdminHistory/AdminHistory";
 
 function App() {
 
@@ -46,9 +49,14 @@ function App() {
 
                         <Route path='/seller' element={<Seller/>}/>
 
+                        <Route path='/admin' element={<Admin/>}/>
 
-                        <Route path='/ship' element={<Receive/>}/>
-                        <Route path='/receive' element={<Ship/>}/>
+
+                        <Route path='/receive' element={<Receive/>}/>
+                        <Route path='/ship' element={<Ship/>}/>
+
+                        <Route path='/sellerHistory' element={<SellerHistory/>}/>
+                        <Route path='/adminHistory' element={<AdminHistory/>}/>
 
 
                         {/*<Route path='/register' element={<Register/>}/>*/}

@@ -1,4 +1,4 @@
-import styles from "./Register.module.css"
+import "./Register.css"
 import {Link} from "react-router-dom";
 import {FaFacebookF, FaGooglePlusG, FaTwitter} from "react-icons/fa";
 import logo from "../Login/images/logo.jpg";
@@ -156,24 +156,26 @@ export default function Register() {
                                 <div className="text-left mb-3">
                                     <button type="submit" className="btn" onClick={register}>Register</button>
                                 </div>
-                                <div className="text-white mb-3">or Register with</div>
-                                <div className="row mb-3">
-                                    <div className="col-4">
-                                        <a href className="btn btn-block btn-social btn-facebook">
-                                            <FaFacebookF/>
-                                        </a>
-                                    </div>
-                                    <div className="col-4">
-                                        <a href className="btn btn-block btn-social btn-google">
-                                            <FaGooglePlusG/>
-                                        </a>
-                                    </div>
-                                    <div className="col-4">
-                                        <a href className="btn btn-block btn-social btn-twitter">
-                                            <FaTwitter/>
-                                        </a>
-                                    </div>
-                                </div>
+                                {/*<div className="text-white mb-3">or Register with</div>*/}
+                                {/*<div className="row mb-3">*/}
+                                {/*    <div className="col-4">*/}
+                                {/*        <a href className="btn btn-block btn-social btn-facebook">*/}
+                                {/*            <FaFacebookF style={{*/}
+                                {/*                background: "#4866a8",*/}
+                                {/*            }}/>*/}
+                                {/*        </a>*/}
+                                {/*    </div>*/}
+                                {/*    <div className="col-4">*/}
+                                {/*        <a href className="btn btn-block btn-social btn-google">*/}
+                                {/*            <FaGooglePlusG/>*/}
+                                {/*        </a>*/}
+                                {/*    </div>*/}
+                                {/*    <div className="col-4">*/}
+                                {/*        <a href className="btn btn-block btn-social btn-twitter">*/}
+                                {/*            <FaTwitter/>*/}
+                                {/*        </a>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                                 <div className="text-white">Already have an account?
                                     <Link to="/login" className="registerLink">Login here</Link>
                                 </div>

@@ -44,8 +44,6 @@ module.exports.readUserCart = async (req, res) => {
 module.exports.deleteCartItem = async (req, res) => {
     const {cartItemId, uid} = req.body;
 
-    console.log(cartItemId, uid, "uwooh?");
-
     try {
         const temp = await Cart.findOneAndDelete({"_id": mongoose.Types.ObjectId(cartItemId)});
 
@@ -64,6 +62,38 @@ module.exports.deleteCartItem = async (req, res) => {
         res.send(error);
     }
 }
+
+module.exports.updateCartQuantity = async (req, res) => {
+    const {cartItemId, uid, quantity} = req.body;
+
+    try {
+        const temp = await Cart.findOneAndUpdate(
+            {"_id": mongoose.Types.ObjectId(cartItemId)},
+            {
+                $set: {"quantity": quantity}
+            },
+            {new: true}
+        );
+
+        res.json(temp);
+
+        // let cartItems = await Cart.find({"uid": mongoose.Types.ObjectId(uid)});
+        //
+        // let finalArray = []
+        //
+        // for (const cartItem of cartItems) {
+        //     let product = await Product.find({"_id": cartItem.productId})
+        //     finalArray.push([cartItem, product[0]]);
+        // }
+
+        // res.send(finalArray);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+
+}
+
 
 module.exports.completePurchase = async (req, res) => {
     // const {shippingId, productId, sellerId, userId} = req.body;

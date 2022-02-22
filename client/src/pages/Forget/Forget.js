@@ -1,4 +1,5 @@
 import logo from "./bg1.jpg"
+// import styles from "./Forget.css"
 
 export default function Forget() {
     return (
@@ -35,7 +36,8 @@ export default function Forget() {
                                         <button type="submit" className="btn">Login Now</button>
                                     </a>
                                 </div>
-                            </div>d
+                            </div>
+                            d
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 d-none d-md-block imageContainer"/>

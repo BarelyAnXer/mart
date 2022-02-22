@@ -5,7 +5,11 @@ const cookieParser = require("cookie-parser");
 const {requireAuth, checkUser} = require("./authMiddleware");
 const authRoutes = require("./Routes/authRoutes");
 const productRoutes = require("./Routes/productRoutes");
-const cartRoutes = require("./Routes/cartRoutes")
+const cartRoutes = require("./Routes/cartRoutes");
+const orderRoutes = require("./Routes/orderRoutes");
+const userRoutes = require("./Routes/userRoutes");
+const historyRoutes = require("./Routes/historyRoutes");
+
 const Grid = require("gridfs-stream");
 Grid.mongo = mongoose.mongo;
 
@@ -60,3 +64,6 @@ app.get("/file/:filename", function (req, res) {
 app.use(productRoutes);
 app.use(authRoutes);
 app.use(cartRoutes);
+app.use(orderRoutes);
+app.use(userRoutes);
+app.use(historyRoutes);

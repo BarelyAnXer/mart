@@ -1,6 +1,5 @@
 import {FaPlus,} from "react-icons/fa";
 import {useEffect, useState} from "react";
-import CustomModal from "../../Components/CustomModal";
 import {ProductRow} from "./Row";
 import {Modal} from "react-bootstrap";
 import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
@@ -63,13 +62,13 @@ export default function Crud() {
         const uid = user._id;
 
 
-        console.log(typeof price == "number", typeof quantity !== "number", formData.get("image") == null)
-
-        if (typeof price == "number" || typeof quantity !== "number" || formData.get("image") == null) {
-            setHasError(true);
-            setShowModal(true);
-            return
-        }
+        // console.log(typeof price == "number", typeof quantity !== "number", formData.get("image") == null)
+        //
+        // if (typeof price == "number" || typeof quantity !== "number" || formData.get("image") == null) {
+        //     setHasError(true);
+        //     setShowModal(true);
+        //     return
+        // }
 
 
         formData.append('name', name);
@@ -152,7 +151,7 @@ export default function Crud() {
                                 </>
                             ) : (
                                 <>
-                                    SuccessFully Created
+                                    Action Success
                                 </>
                             )
                         }

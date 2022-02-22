@@ -15,28 +15,32 @@ export default function FAQ() {
                                  aria-multiselectable="true">
                                 <Accordion defaultActiveKey="0">
                                     <Accordion.Item eventKey="0">
-                                        <Accordion.Header>Accordion Item #1</Accordion.Header>
-                                        <Accordion.Body>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                            est laborum.
-                                        </Accordion.Body>
+                                        <Accordion.Header>How long does it take to ship my order?</Accordion.Header>
+                                        <Accordion.Body>Orders are usually shipped within 1-2 business days after
+                                            placing the order.</Accordion.Body>
                                     </Accordion.Item>
                                     <Accordion.Item eventKey="1">
-                                        <Accordion.Header>Accordion Item #2</Accordion.Header>
-                                        <Accordion.Body>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                            est laborum.
-                                        </Accordion.Body>
+                                        <Accordion.Header>When will my order arrive?</Accordion.Header>
+                                        <Accordion.Body>Shipping time is set by our delivery partners, according to the
+                                            delivery method chosen by you. Additional details can be found in the order
+                                            confirmation email you’ve received.</Accordion.Body>
+                                    </Accordion.Item>
+                                    <Accordion.Item eventKey="2">
+                                        <Accordion.Header>How do I make changes to an existing order?</Accordion.Header>
+                                        <Accordion.Body>A: Changes to an existing order can be made as long as the order
+                                            is still in “processing” status. Please contact our team via email and we’ll
+                                            make sure to apply the needed changes. If your order has already been
+                                            shipped, we cannot apply any changes to it. If you are unhappy with your
+                                            order when it arrives, please contact us for any changes you may
+                                            require.</Accordion.Body>
+                                    </Accordion.Item>
+                                    <Accordion.Item eventKey="3">
+                                        <Accordion.Header>What does the warranty cover?</Accordion.Header>
+                                        <Accordion.Body>The warranty and its guidelines to your different products. If
+                                            you offer various products with additional policies, it’s best to list them
+                                            all out. For example: The warranty covers defects in materials. It does not
+                                            cover issues caused by damage due to shipment, handling, storage, accident,
+                                            impact, abuse or misuse.</Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>
 

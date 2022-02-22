@@ -35,7 +35,7 @@ export default function Contact() {
                                               placeholder="How can we help?" defaultValue={""}/>
                                 </div>
                                 <div className="text-center">
-                                    <button type="submit" className="btn btn-elegant">Submit</button>
+                                    <button type="button" className="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>
