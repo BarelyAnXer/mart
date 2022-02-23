@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 export default function ViewProducts() {
 
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState(["12", "test"]);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     useEffect(() => {
         fetch("/readAll", {
@@ -17,7 +19,34 @@ export default function ViewProducts() {
             console.log(error)
         });
 
+        fetch("/getCategories", {
+            method: "GET",
+        }).then(response => response.json()).then(data => {
+
+            let unique = data.filter(function (item, pos) {
+                return data.indexOf(item) == pos;
+            })
+
+            setCategories(unique)
+        }).catch(error => {
+            console.log(error)
+        });
+
     }, []);
+
+    const filterProducts = (event) => {
+        event.preventDefault();
+
+        let cate = event.target.getAttribute("name");
+
+        fetch(`/getFilterProduct/${cate}`, {
+            method: "GET",
+        }).then(response => response.json()).then(data => {
+            setProducts(data);
+        }).catch(error => {
+            console.log(error)
+        });
+    }
 
     const GOTO = (event) => {
         event.preventDefault();
@@ -40,26 +69,45 @@ export default function ViewProducts() {
                 fontSize: "3rem"
             }}>Products</h1>
 
-            <div style={{
-                maxWidth: "400px",
-                display: "block",
-                margin: "auto"
-            }}>
-                <div className="input-group md-form form-sm form-2 pl-0">
-                    <input className="form-control my-0 py-1 red-border" type="text" placeholder="Search"
-                           aria-label="Search"/>
-                    <div className="input-group-append" style={{
-                        cursor: "pointer"
-                    }}>
-                        <span className="input-group-text red lighten-3" id="basic-text1"><FaSearch/></span>
-                    </div>
-                </div>
-            </div>
+            {/*<div style={{*/}
+            {/*    maxWidth: "400px",*/}
+            {/*    display: "block",*/}
+            {/*    margin: "auto"*/}
+            {/*}}>*/}
+            {/*    <div className="input-group md-form form-sm form-2 pl-0">*/}
+            {/*        <input className="form-control my-0 py-1 red-border" type="text" placeholder="Search"*/}
+            {/*               aria-label="Search"/>*/}
+            {/*        <div className="input-group-append" style={{*/}
+            {/*            cursor: "pointer"*/}
+            {/*        }}>*/}
+            {/*            <span className="input-group-text red lighten-3" id="basic-text1"><FaSearch/></span>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
 
             <div className="container my-5">
                 <section>
                     <div className="row">
+
+                        <div style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                        }}>
+                            {categories.map((category) => {
+                                return (
+                                    <>
+                                        <button type="button" className="btn btn-primary m-2 badge badge-light p-2"
+                                                name={category}
+                                                onClick={filterProducts}
+                                        >
+                                            {category}
+                                        </button>
+                                    </>
+                                );
+                            })}
+                        </div>
+
 
                         {products.map((product) => {
                             return (

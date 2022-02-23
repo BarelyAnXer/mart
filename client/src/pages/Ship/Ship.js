@@ -43,7 +43,7 @@ export default function Ship() {
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Seller ID</th>
+                                <th>Buyer ID</th>
                                 <th>Product Name</th>
                                 <th>Product Image</th>
                                 <th>Actions</th>

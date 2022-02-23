@@ -2,14 +2,20 @@
 import ReactElasticCarousel from "react-elastic-carousel";
 
 import img from "./img.jpg"
-import {Button, Card, Carousel} from "react-bootstrap";
+import {Button, Card, Carousel, Modal} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
+import {useNavigate} from "react-router-dom";
 
 export default function ProductsCarousell() {
 
-
+    let navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+    const [showModal, setShowModal] = useState(false);
+    const [hasError, setHasError] = useState(false);
+
 
     const breakPoints = [
         {width: 1, itemsToShow: 1},
@@ -34,6 +40,57 @@ export default function ProductsCarousell() {
 
     return (
         <>
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="md"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Message
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    {hasError ?
+                        (
+                            <>
+                                <AiOutlineClose style={{
+                                    fontSize: "3rem",
+                                    color: "red"
+                                }}/>
+                            </>
+                        ) : (
+                            <>
+                                <AiOutlineCheck style={{
+                                    fontSize: "3rem",
+                                    color: "green"
+                                }}/>
+                            </>
+                        )
+                    }
+                    <p style={{
+                        fontSize: "1.5rem"
+                    }}>
+                        {hasError ?
+                            (
+                                <>
+                                    Please Login First
+                                </>
+                            ) : (
+                                <>
+                                    {/*Purchase Complete*/}
+                                </>
+                            )
+                        }
+                    </p>
+                </Modal.Body>
+            </Modal>
+
             <div className="container-xl">
                 <div className="row">
                     <div className="col-md-12">
@@ -56,7 +113,9 @@ export default function ProductsCarousell() {
                                                 <button className="btn btn-primary rounded-pill"
                                                         onClick={() => {
                                                             if (user === null) {
-                                                                console.log("please login first");
+                                                                setHasError(true);
+                                                                setShowModal(true);
+                                                                // navigate("/viewProducts");
                                                             } else {
 
                                                             }

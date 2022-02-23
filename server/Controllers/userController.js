@@ -37,6 +37,22 @@ module.exports.updateUser = async (req, res) => {
     res.status(200).json(users);
 };
 
+module.exports.updateProfile = async (req, res) => {
+    const {password, address, phoneNumber, userID} = req.body;
+
+    const temp = await User.findOneAndUpdate(
+        {"_id": mongoose.Types.ObjectId(userID)},
+        {
+            $set: {
+                "password": password,
+                "address": address,
+                "phoneNumber": phoneNumber,
+            }
+        }, {new: true})
+
+
+    res.status(200).json({"message": "ok"});
+};
 
 
 

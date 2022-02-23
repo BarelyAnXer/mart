@@ -2,11 +2,11 @@ import {useState} from "react";
 import {Figure} from "react-bootstrap";
 import CustomModal from "../../Components/CustomModal";
 
-export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,}) {
+export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct, category}) {
     const [isEditing, setIsEditing] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    const [value, setValue] = useState({_id, name, price, quantity, imgUrl});
+    const [value, setValue] = useState({_id, name, price, quantity, imgUrl, category});
 
     const [showEditModal, setShowEditModal] = useState(false);
 
@@ -42,13 +42,14 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
         formData.append("name", value.name);
         formData.append("price", value.price);
         formData.append("quantity", value.quantity);
+        formData.append("category", value.category);
 
         fetch("/update", {
             method: "POST",
             body: formData,
         }).then(response => response.json()).then(data => {
             console.log(data)
-            setValue((prevState) => ({...prevState, imgUrl: data.imgUrl}));
+            setValue((prevState) => ({...prevState, imgUrl: data.imgUrl, category: data.category}));
         }).catch(error => {
             console.log(error)
         });
@@ -68,12 +69,18 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
 
             <tr>
 
-                <td>{value._id}</td>
+                <td style={{
+                    wordWrap: "break-word"
+                }}>{value._id}</td>
                 {isEditing ? (
                     <>
                         <td>
                             <input type="text" placeholder="name" value={value.name}
                                    onChange={(event) => handleChange("name", event)}/>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="category" value={value.category}
+                                   onChange={(event) => handleChange("category", event)}/>
                         </td>
                         <td>
                             <input type="text" placeholder="price" value={value.price}
@@ -103,6 +110,7 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
                     <>
 
                         <td>{value.name}</td>
+                        <td>{value.category}</td>
                         <td>{value.price}</td>
                         <td>{value.quantity}</td>
                         <td>
@@ -113,14 +121,10 @@ export function ProductRow({name, price, quantity, imgUrl, _id, deleteProduct,})
                                     alt="200x200"
                                     src={value.imgUrl}
                                 />
-                                {/*<Figure.Caption>*/}
-                                {/*    Nulla vitae elit libero, a pharetra augue mollis interdum.*/}
-                                {/*</Figure.Caption>*/}
                             </Figure>
                         </td>
 
                         <td>
-                            {/*<MdPlaylistAdd onClick={}/>*/}
                             {isEditing ? (
                                 <span>
                                     <input type="button" value="save" name={value._id} onClick={saveEdit}/>

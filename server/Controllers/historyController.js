@@ -59,3 +59,49 @@ module.exports.getAdminHistory = async (req, res) => {
         res.status(400).json({errors: error});
     }
 }
+
+module.exports.deleteHistory = async (req, res) => {
+    try {
+
+        const {historyID} = req.body;
+
+        await History.findOneAndDelete({"_id": mongoose.Types.ObjectId(historyID)});
+
+        const sellers = await User.find({"accType": "Seller"});
+
+        let adminHistory = [];
+
+        for (const seller of sellers) {
+
+            let histories = await History.find({"sellerID": seller._id});
+
+
+            adminHistory.push({
+                "sellerName": seller.email,
+                "histories": histories,
+            });
+
+        }
+
+        res.status(201).json(adminHistory);
+    } catch (error) {
+        res.status(400).json({errors: error});
+    }
+}
+
+module.exports.deleteSellerHistory = async (req, res) => {
+    const {sellerID, historyID} = req.body;
+
+    try {
+
+        await History.findOneAndDelete({"_id": mongoose.Types.ObjectId(historyID)});
+
+        const histories = await History.find({"sellerID": mongoose.Types.ObjectId(sellerID)});
+
+        res.status(201).send(histories);
+    } catch (error) {
+        res.status(400).json({errors: error});
+    }
+}
+
+

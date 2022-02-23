@@ -2,7 +2,7 @@ const Product = require("../Models/Product");
 const mongoose = require("mongoose");
 
 module.exports.create = async (req, res) => {
-    const {name, price, quantity, uid} = req.body;
+    const {name, price, quantity, uid, category} = req.body;
     const {id} = req.file
 
     console.log(req.file);
@@ -18,15 +18,14 @@ module.exports.create = async (req, res) => {
             quantity,
             uid,
             imgId: id,
-            imgUrl
+            imgUrl,
+            category
         });
         const products = await Product.find({"uid": uid});
         res.status(201).json(products);
     } catch (error) {
         res.status(400).json({errors: error});
     }
-
-    // Product.updateOne({_id: "id"}, {$inc: {"": 1}})
 
 };
 
@@ -43,10 +42,7 @@ module.exports.readSellerProducts = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const {id, filename} = req.file;
-    const {productId, name, price, quantity} = req.body;
-
-    console.log("jere");
-    console.log(filename, "ASDNLKASDLJKASLKHDLH");
+    const {productId, name, price, quantity, category} = req.body;
 
     const product = await Product.find({"_id": productId});
     const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName: 'uploads'});
@@ -60,7 +56,8 @@ module.exports.update = async (req, res) => {
                 "imgUrl": imgUrl,
                 "name": name,
                 "price": price,
-                "quantity": quantity
+                "quantity": quantity,
+                "category": category
             }
         }, {new: true})
 
@@ -107,4 +104,37 @@ module.exports.incrementTest = async (req, res) => {
     }, {new: true})
 
     res.send(product);
+};
+
+module.exports.getCategories = async (req, res) => {
+    try {
+        const products = await Product.find({});
+
+        let categories = [];
+
+        for (const product of products) {
+            categories.push(product.category);
+        }
+
+        res.status(200).send(categories);
+
+    } catch (errors) {
+        res.status(400).json({"errors": errors});
+    }
+};
+
+module.exports.getFilterProduct = async (req, res) => {
+    const category = req.params.category;
+
+    console.log(category);
+
+    try {
+
+        const products = await Product.find({"category": category})
+
+        res.status(200).json(products);
+
+    } catch (errors) {
+        res.status(400).json({"errors": errors});
+    }
 };

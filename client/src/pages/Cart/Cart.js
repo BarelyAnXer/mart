@@ -292,7 +292,6 @@ export default function Cart() {
         const fee = event.target.getAttribute("name");
         console.log(fee);
         setShippingFee(parseInt(fee));
-
     }
 
     const computePrice = () => {

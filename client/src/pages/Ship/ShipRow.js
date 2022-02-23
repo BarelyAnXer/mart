@@ -29,9 +29,11 @@ export function ShipRow({order, setOrders}) {
             <tr key={order._id}>
                 <>
                     <td>{order._id}</td>
-                    <td>{order.buyerId}</td>
-                    <td>product name</td>
-                    <td>product image</td>
+                    <td>{order.buyerEmail}</td>
+                    <td>{order.productName}</td>
+                    <td>
+                        <img src={order.imgUrl} className="img-fluid" alt=""/>
+                    </td>
                     <td>
                         <button type="button" className="btn btn-sm btn-primary"
                                 data-toggle="tooltip"

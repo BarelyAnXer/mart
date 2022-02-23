@@ -23,7 +23,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: "imageUrl",
+    },
+    category: {
+        type: String,
     }
+
 });
 
 const Product = mongoose.model("product", productSchema);

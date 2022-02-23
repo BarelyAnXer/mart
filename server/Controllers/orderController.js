@@ -29,7 +29,7 @@ module.exports.createOrder = async (req, res) => {
             let history = await History.create({
                 sellerID: mongoose.Types.ObjectId(productSellerId),
                 description: `Product ${product.name}  Bought at ${new Date().toISOString().replace(/T/, ' ').      // replace T with a space
-                    replace(/\..+/, '')} with Quantity of ${userCartItem.quantity} by buyer with an email of ${user.email}`
+                    replace(/\..+/, '')} at the price of ₱${product.price} with Quantity of ${userCartItem.quantity} by buyer with an email of ${user.email}`
             });
 
             let order = await Order.create({
@@ -65,12 +65,13 @@ module.exports.getBuyerToReceive = async (req, res) => {
 
             let prod = await Product.findOne({"_id": mongoose.Types.ObjectId(order.productID)});
 
-            console.log(prod, "test");
+            let sellerEmail = await User.findOne({"_id": mongoose.Types.ObjectId(order.sellerID)});
 
             finalArray.push({
                 "_id": order._id,
                 "buyerId": order.buyerId,
                 "sellerID": order.sellerID,
+                "sellerEmail": sellerEmail.email,
                 "ProductID": order.ProductID,
                 "productName": prod.name,
                 "imgUrl": prod.imgUrl,
@@ -91,7 +92,27 @@ module.exports.getSellerOrders = async (req, res) => {
 
     try {
         const orders = await Order.find({"sellerID": mongoose.Types.ObjectId(sellerID)})
-        res.status(200).json(orders);
+        let finalArray = []
+
+        for (const order of orders) {
+
+            let prod = await Product.findOne({"_id": mongoose.Types.ObjectId(order.productID)});
+
+            let buyerEmail = await User.findOne({"_id": mongoose.Types.ObjectId(order.buyerId)});
+
+            finalArray.push({
+                "_id": order._id,
+                "buyerId": order.buyerId,
+                "sellerID": order.sellerID,
+                "buyerEmail": buyerEmail.email,
+                "ProductID": order.ProductID,
+                "productName": prod.name,
+                "imgUrl": prod.imgUrl,
+            })
+        }
+
+
+        res.status(200).json(finalArray);
     } catch (error) {
         res.status(400).json({errors: error});
     }

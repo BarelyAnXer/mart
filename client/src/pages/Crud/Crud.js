@@ -10,6 +10,7 @@ export default function Crud() {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
+    const [category, setCategory] = useState("");
 
     const [products, setProducts] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -75,6 +76,7 @@ export default function Crud() {
         formData.append('price', price);
         formData.append('quantity', quantity);
         formData.append('uid', uid);
+        formData.append('category', category);
 
         fetch("/create", {
             method: "POST",
@@ -163,7 +165,9 @@ export default function Crud() {
             <div className="container-lg" style={{
                 marginBottom: "2.5rem"
             }}>
-                <div className="table-responsive">
+                <div className="table-responsive" style={{
+                    tableLayout: "fixed",
+                }}>
                     <div className="table-wrapper">
                         <div className="table-title">
                             <div className="row">
@@ -183,12 +187,13 @@ export default function Crud() {
                         <table className="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Product Id</th>
-                                <th>Product Name</th>
-                                <th>Product Price</th>
-                                <th>Product Quantity</th>
-                                <th>Product Image</th>
-                                <th>Product Actions</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Image</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -209,6 +214,11 @@ export default function Crud() {
                                                onChange={(event) => setName(event.target.value)}/>
                                     </td>
                                     <td>
+                                        <input type="text" placeholder="category"
+                                               onChange={(event) => setCategory(event.target.value)}
+                                        />
+                                    </td>
+                                    <td>
                                         <input type="text" placeholder="price"
                                                onChange={(event) => setPrice(event.target.value)}/>
                                     </td>
@@ -220,7 +230,6 @@ export default function Crud() {
                                         <form action="/upload" method="POST" encType="multipart/form-data">
                                             <input type="file" id="fileInput" name="image"
                                                    accept="image/png, image/jpeg" onChange={handleFileSelected}/>
-                                            {/*<input type="submit" value="submit"/>*/}
                                         </form>
                                     </td>
                                     <td>

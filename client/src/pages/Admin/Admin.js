@@ -82,11 +82,11 @@ export default function Admin() {
                                 <div className="col-sm-8"><h2><b>User Details</b></h2></div>
                                 <div className="col-sm-4">
 
-                                    <button type="button" className="btn btn-info add-new"
-                                            onClick={() => setIsAdding(!isAdding)}>
-                                        Add New
-                                        <FaPlus/>
-                                    </button>
+                                    {/*<button type="button" className="btn btn-info add-new"*/}
+                                    {/*        onClick={() => setIsAdding(!isAdding)}>*/}
+                                    {/*    Add New*/}
+                                    {/*    <FaPlus/>*/}
+                                    {/*</button>*/}
 
                                 </div>
                             </div>
@@ -97,6 +97,7 @@ export default function Admin() {
                             <tr>
                                 <th>Id</th>
                                 <th>Email</th>
+                                <th>Password</th>
                                 <th>Address</th>
                                 <th>Account Type</th>
                                 <th>isVerified</th>

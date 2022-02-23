@@ -47,12 +47,12 @@ module.exports.login_get = (req, res) => {
 };
 
 module.exports.signup_post = async (req, res) => {
-    const {email, password, address, accType} = req.body
+    const {email, password, address, accType, phoneNumber} = req.body
 
     console.log({email, password, address, accType});
 
     try {
-        const user = await User.create({email, password, address, accType});
+        const user = await User.create({email, password, address, accType, phoneNumber});
         const token = createToken(user._id);
         res.cookie("jwt", token, {httpOnly: true, maxAge: maxAge * 1000});
         res.status(201).json({user: user._id});

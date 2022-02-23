@@ -42,6 +42,9 @@ export function AdminRow({user, deleteUser, updateUser}) {
                             />
                         </td>
                         <td>
+                            <p></p>
+                        </td>
+                        <td>
                             <input type="text"
                                    placeholder="address"
                                    value={address}
@@ -51,7 +54,7 @@ export function AdminRow({user, deleteUser, updateUser}) {
                             />
                         </td>
                         <td>
-                            <p>temp</p>
+                            <p></p>
                         </td>
                         <td>
                             {/*<ClientChoice defaultValue={user.isVerified}/>*/}
@@ -100,8 +103,11 @@ export function AdminRow({user, deleteUser, updateUser}) {
                     </>
                 ) : (
                     <>
-                        <td>{user._id}</td>
+                        <td style={{
+                            wordWrap: "break-word"
+                        }}>{user._id}</td>
                         <td>{user.email}</td>
+                        <td>{user.password}</td>
                         <td>{user.address}</td>
                         <td>{user.accType}</td>
                         <td>{user.isVerified.toString()}</td>

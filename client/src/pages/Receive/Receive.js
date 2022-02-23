@@ -51,7 +51,7 @@ export default function Receive() {
                         <table className="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Order Id</th>
                                 <th>Seller ID</th>
                                 <th>Product Name</th>
                                 <th>Product Image</th>

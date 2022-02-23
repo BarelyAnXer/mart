@@ -9,7 +9,6 @@ export function ReceiveRow({order, setOrders}) {
         event.preventDefault();
 
         const buyerId = user._id;
-
         const orderID = event.target.getAttribute("name");
 
         fetch("/removeOrder", {
@@ -17,6 +16,7 @@ export function ReceiveRow({order, setOrders}) {
             body: JSON.stringify({orderID: orderID, "buyerId": buyerId}),
             headers: {"Content-Type": "application/json"},
         }).then(response => response.json()).then(data => {
+            console.log(data);
             setOrders(data);
         }).catch(error => {
             console.log(error)
@@ -29,7 +29,7 @@ export function ReceiveRow({order, setOrders}) {
             <tr key={order._id}>
                 <>
                     <td>{order._id}</td>
-                    <td>{order.buyerId}</td>
+                    <td>{order.sellerEmail}</td>
                     <td>{order.productName}</td>
                     <td>
                         <img src={order.imgUrl} className="img-fluid" alt=""/>

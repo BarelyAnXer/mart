@@ -46,6 +46,9 @@ router.post("/readSellerProducts", productController.readSellerProducts);
 router.post("/delete", productController.delete);
 router.get("/product/:id", productController.product);
 router.post("/update", imageUpload.single("image"), productController.update);
+router.get("/getCategories", productController.getCategories);
+router.get("/getFilterProduct/:category", productController.getFilterProduct);
+
 
 router.get("/incrementTest", productController.incrementTest);
 

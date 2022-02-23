@@ -26,23 +26,30 @@ const userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false,
+    }, phoneNumber: {
+        type: String,
     }
 });
 
 // hooks fire a function before saving to db
-userSchema.pre("save", async function (next) {
-    console.log("user about to be created", this);
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
+// userSchema.pre("save", async function (next) {
+//     console.log("user about to be created", this);
+//     const salt = await bcrypt.genSalt();
+//     this.password = await bcrypt.hash(this.password, salt);
+//     next();
+// });
 
 // static method to login user
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({email});
     if (user) {
-        const auth = await bcrypt.compare(password, user.password);
-        if (auth) {
+
+        console.log(password === user.password)
+        console.log(typeof password, typeof user.password)
+
+        // const auth = await bcrypt.compare(password, user.password);
+        // const auth =;
+        if (password === user.password) {
             return user;
         }
         throw Error("incorrect password");

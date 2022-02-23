@@ -7,6 +7,7 @@ import Testimonials from "../../Components/Testimonials";
 
 import img1 from "./Untitled-design-7.png"
 import img2 from "./variety.jpg"
+import {Link} from "react-router-dom";
 
 
 export default function Home() {
@@ -34,7 +35,12 @@ export default function Home() {
                                 molestiae
                                 numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam, doloremque
                                 laborum.</p>
-                            <button type="button" className="btn btn-primary">Shop Now</button>
+                            <button type="button" className="btn btn-primary">
+                                <Link to="/viewProducts" style={{
+                                    color: "white",
+                                    textDecoration: "none",
+                                }}>Shop Now</Link>
+                            </button>
                         </div>
                         <div className="col-md-6 mb-4 mb-md-0">
 
@@ -75,7 +81,12 @@ export default function Home() {
                                 molestiae
                                 numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam, doloremque
                                 laborum.</p>
-                            <button type="button" className="btn btn-primary">Start now</button>
+                            <button type="button" className="btn btn-primary">
+                                <Link to="/viewProducts" style={{
+                                    color: "white",
+                                    textDecoration: "none",
+                                }}>Start Now</Link>
+                            </button>
                         </div>
 
                     </div>

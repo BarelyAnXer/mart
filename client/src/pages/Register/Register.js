@@ -13,6 +13,7 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
     const [accType, setAccType] = useState("Buyer");
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     const [show, setShow] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -32,7 +33,8 @@ export default function Register() {
                 "email": email,
                 "password": password,
                 "address": address,
-                "accType": accType
+                "accType": accType,
+                "phoneNumber": phoneNumber
             }),
             headers: {"Content-Type": "application/json"},
         }).then((response) => {
@@ -131,6 +133,12 @@ export default function Register() {
                                     <span><i className="fa fa-lock"/></span>
                                     <input type="text" placeholder="Address"
                                            onChange={(event) => setAddress(event.target.value)} required/>
+                                </div>
+
+                                <div className="formInput">
+                                    <span><i className="fa fa-lock"/></span>
+                                    <input type="text" placeholder="Phone Number"
+                                           onChange={(event) => setPhoneNumber(event.target.value)} required/>
                                 </div>
 
                                 <div className="formInput">

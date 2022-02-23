@@ -52,6 +52,14 @@ export default function Login() {
                 setHasError(true);
                 setShow(true);
             } else {
+
+                if (data.isVerified === false) {
+                    setHasError(true);
+                    setShow(true);
+                    return;
+                }
+
+
                 localStorage.setItem("user", JSON.stringify(data));
                 setUser(JSON.parse(localStorage.getItem("user")));
 
@@ -109,7 +117,7 @@ export default function Login() {
                         <p style={{
                             textAlign: "center",
                         }}>
-                            {hasError ? <> Complete the form, Check your Password, Email might not be
+                            {hasError ? <> Complete the form, Check your Password or Email might not be
                                 Registered </> : <></>}
                         </p>
                     </p>
