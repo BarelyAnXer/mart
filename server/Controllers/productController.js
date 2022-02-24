@@ -1,8 +1,9 @@
 const Product = require("../Models/Product");
 const mongoose = require("mongoose");
+const User = require("../Models/User");
 
 module.exports.create = async (req, res) => {
-    const {name, price, quantity, uid, category} = req.body;
+    const {name, price, quantity, uid, category, description} = req.body;
     const {id} = req.file
 
     console.log(req.file);
@@ -19,7 +20,8 @@ module.exports.create = async (req, res) => {
             uid,
             imgId: id,
             imgUrl,
-            category
+            category,
+            description
         });
         const products = await Product.find({"uid": uid});
         res.status(201).json(products);
@@ -42,7 +44,7 @@ module.exports.readSellerProducts = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const {id, filename} = req.file;
-    const {productId, name, price, quantity, category} = req.body;
+    const {productId, name, price, quantity, category, description} = req.body;
 
     const product = await Product.find({"_id": productId});
     const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName: 'uploads'});
@@ -57,7 +59,8 @@ module.exports.update = async (req, res) => {
                 "name": name,
                 "price": price,
                 "quantity": quantity,
-                "category": category
+                "category": category,
+                "description": description
             }
         }, {new: true})
 
@@ -93,8 +96,31 @@ module.exports.delete = async (req, res) => {
 
 module.exports.product = async (req, res) => {
     const productId = req.params.id
-    const product = await Product.find({"_id": productId})
-    res.status(200).json(product);
+
+    let finalProduct;
+
+    const product = await Product.findOne({"_id": productId});
+
+    const user = await User.findOne({"_id": mongoose.Types.ObjectId(product.uid)})
+    // console.log(product);
+    // console.log(user);
+
+    finalProduct = {
+        "_id": product._id,
+        "name": product.name,
+        "price": product.price,
+        "quantity": product.quantity,
+        "uid": product.uid,
+        "imgId": product.imgId,
+        "imgUrl": product.imgUrl,
+        "category": product.category,
+        "sellerEmail": user.email,
+    }
+
+    console.log(finalProduct, "finprdo")
+
+
+    res.status(200).json(finalProduct);
 };
 
 module.exports.incrementTest = async (req, res) => {

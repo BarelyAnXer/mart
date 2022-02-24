@@ -16,9 +16,9 @@ export default function Home() {
             <div className="container-fluid banner">
                 <div className="row">
                     <div className="col-md-8 offset-md-2 info">
-                        <h1 className="text-center">Lorem Ipsum</h1>
-                        <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                        <a href="/" className="btn btn-md text-center">GET STARTED</a>
+                        <h1 className="text-center">TUBEMART</h1>
+                        <p className="text-center">spring of hope marketplace</p>
+                        {/*<a href="/" className="btn btn-md text-center">GET STARTED</a>*/}
                     </div>
                 </div>
             </div>

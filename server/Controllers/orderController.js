@@ -98,16 +98,17 @@ module.exports.getSellerOrders = async (req, res) => {
 
             let prod = await Product.findOne({"_id": mongoose.Types.ObjectId(order.productID)});
 
-            let buyerEmail = await User.findOne({"_id": mongoose.Types.ObjectId(order.buyerId)});
+            let buyer = await User.findOne({"_id": mongoose.Types.ObjectId(order.buyerId)});
 
             finalArray.push({
                 "_id": order._id,
                 "buyerId": order.buyerId,
                 "sellerID": order.sellerID,
-                "buyerEmail": buyerEmail.email,
+                "buyerEmail": buyer.email,
                 "ProductID": order.ProductID,
                 "productName": prod.name,
                 "imgUrl": prod.imgUrl,
+                "buyerPhoneNumber": buyer.phoneNumber,
             })
         }
 

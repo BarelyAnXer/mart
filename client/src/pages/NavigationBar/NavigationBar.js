@@ -33,7 +33,7 @@ export default function NavigationBar() {
             } else if (user.accType === "Seller") {
                 return (
                     <>
-                        <Nav.Link href="/crud">Dashboard</Nav.Link>
+                        <Nav.Link href="/crud">Products</Nav.Link>
                         <Nav.Link href="/ship">Orders</Nav.Link>
                         <Nav.Link href="/sellerHistory">History</Nav.Link>
                     </>
@@ -41,7 +41,7 @@ export default function NavigationBar() {
             } else if (user.accType === "admin") {
                 return (
                     <>
-                        <Nav.Link href="/admin">Dashboard</Nav.Link>
+                        <Nav.Link href="/admin">Users</Nav.Link>
                         <Nav.Link href="/AdminHistory">History</Nav.Link>
                     </>
                 );
@@ -70,7 +70,7 @@ export default function NavigationBar() {
         if (user.accType === "admin") {
             return (
                 <>
-                    <Nav.Link href="/login">ADMIN</Nav.Link>
+                    <Nav.Link>ADMIN</Nav.Link>
                     <Nav.Link href="/login" onClick={() => {
                         localStorage.removeItem("user");
                     }}>Logout</Nav.Link>

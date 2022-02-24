@@ -5,7 +5,8 @@ import img from "./img.jpg"
 import {Button, Card, Carousel, Modal} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {FaShoppingCart} from "react-icons/fa";
 
 export default function ProductsCarousell() {
 
@@ -106,23 +107,46 @@ export default function ProductsCarousell() {
                                     <>
                                         <div className="card shadow-sm p-3 mb-5 bg-white rounded" key={product._id}
                                              style={{width: '18rem'}}>
-                                            <img className="card-img-top" src={product.imgUrl} alt="Card cap"/>
+                                            <img
+                                                // className="card-img-top"
+                                                src={product.imgUrl}
+                                                height={300}
+                                                width={300}
+                                                alt="Card cap"/>
                                             <div className="card-body">
                                                 <h5 className="card-title text-black">{product.name}</h5>
                                                 <p className="card-text text-dark">₱{product.price.toString()}</p>
-                                                <button className="btn btn-primary rounded-pill"
-                                                        onClick={() => {
-                                                            if (user === null) {
-                                                                setHasError(true);
-                                                                setShowModal(true);
-                                                                // navigate("/viewProducts");
-                                                            } else {
 
-                                                            }
-                                                        }}>ADD TO CART
-                                                </button>
+                                                {user ? (
+                                                        <Button variant="primary"> <Link name={product._id}
+                                                                                         to={`/product/${product._id}`}>
+                                                            <strong style={{
+                                                                marginRight: "10px",
+                                                                color: "black",
+                                                            }}>View Product</strong>
+                                                            <FaShoppingCart style={{
+                                                                color: "black"
+                                                            }}/>
+                                                        </Link></Button>
+                                                    )
+
+                                                    : (
+                                                        <button className="btn btn-primary rounded-pill"
+                                                                onClick={(event) => {
+                                                                    if (user === null) {
+                                                                        setHasError(true);
+                                                                        setShowModal(true);
+                                                                    }
+                                                                }}>View Product
+                                                        </button>
+                                                    )
+                                                }
+
+
                                             </div>
                                         </div>
+
+
                                     </>
                                 )
                             })

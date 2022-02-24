@@ -17,6 +17,7 @@ export default function Ship() {
             body: JSON.stringify({"sellerID": uid,}),
             headers: {"Content-Type": "application/json"},
         }).then(response => response.json()).then(data => {
+            console.log(data);
             setOrders(data)
         }).catch(error => {
             console.log(error)
@@ -43,7 +44,8 @@ export default function Ship() {
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Buyer ID</th>
+                                <th>Buyer Email</th>
+                                <th>Buyer Phone Number</th>
                                 <th>Product Name</th>
                                 <th>Product Image</th>
                                 <th>Actions</th>

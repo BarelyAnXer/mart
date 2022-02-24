@@ -15,7 +15,8 @@ function Product() {
         fetch(`/product/${id}`, {
             method: "GET",
         }).then(response => response.json()).then(data => {
-            setProduct(data[0])
+            console.log(data, "test");
+            setProduct(data)
         }).catch(error => {
             console.log(error)
         });
@@ -101,19 +102,10 @@ function Product() {
                                                 <div className="row h-100 d-flex align-items-center">
                                                     <div className="col-lg-6">
 
-                                                        <h1 className="mb-5">{product.name}</h1>
+                                                        <h1 className="mb-3">{product.name}</h1>
 
-                                                        <p className="text-muted font-weight-light ml-5 mb-5">Anim
-                                                            pariatur
-                                                            cliche
-                                                            reprehenderit, enim eiusmod high life accusamus terry
-                                                            richardson
-                                                            ad squid. 3
-                                                            wolf moon officia aute,
-                                                            non cupidatat skateboard dolor brunch. Food truck quinoa
-                                                            nesciunt laborum
-                                                            eiusmod.
-                                                        </p>
+
+                                                        <p className="text-muted font-weight-light ml-5 mb-5">{product.description}</p>
                                                         <div
                                                             className="fa-ul mb-5 text-muted font-weight-light d-flex justify-content-between align-items-center gap-4">
                                                             <div className="text-center w-50">
@@ -139,6 +131,7 @@ function Product() {
 
                                                             </div>
 
+
                                                         </div>
                                                         <div className="d-flex justify-content-around ml-3">
                                                             <button type="button" className="btn btn-primary mx-0"
@@ -152,7 +145,10 @@ function Product() {
                                                                 Buy Now
                                                             </button>
                                                         </div>
+
+                                                        <h4 className="mt-3">Seller: {product.sellerEmail}</h4>
                                                     </div>
+
                                                     <div className="col-lg-6">
                                                         <div className>
                                                             <img

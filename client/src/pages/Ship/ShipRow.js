@@ -30,6 +30,7 @@ export function ShipRow({order, setOrders}) {
                 <>
                     <td>{order._id}</td>
                     <td>{order.buyerEmail}</td>
+                    <td>{order.buyerPhoneNumber}</td>
                     <td>{order.productName}</td>
                     <td>
                         <img src={order.imgUrl} className="img-fluid" alt=""/>

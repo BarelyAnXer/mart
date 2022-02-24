@@ -34,7 +34,7 @@ export default function Login() {
                 "_id": "1",
             }));
             setUser(JSON.parse(localStorage.getItem("user")));
-            navigate("/admin");
+            navigate("/");
             return;
 
         }
@@ -64,9 +64,9 @@ export default function Login() {
                 setUser(JSON.parse(localStorage.getItem("user")));
 
                 if (data.accType === "Seller") {
-                    navigate("/crud")
+                    navigate("/")
                 } else if (data.accType === "Buyer") {
-                    navigate("/viewProducts");
+                    navigate("/");
                 }
             }
         }).catch(error => {

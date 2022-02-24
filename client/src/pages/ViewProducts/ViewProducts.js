@@ -116,7 +116,10 @@ export default function ViewProducts() {
 
                                         <div className="view overlay">
                                             <img src={product.imgUrl}
-                                                 className="img-fluid" alt=""/>
+                                                 height={300}
+                                                 width={300}
+                                                // className="img-fluid" alt=""
+                                            />
                                             <a>
                                                 <div className="mask rgba-white-slight"/>
                                             </a>

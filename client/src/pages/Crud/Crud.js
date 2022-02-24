@@ -11,6 +11,7 @@ export default function Crud() {
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
 
     const [products, setProducts] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -77,6 +78,7 @@ export default function Crud() {
         formData.append('quantity', quantity);
         formData.append('uid', uid);
         formData.append('category', category);
+        formData.append('description', description);
 
         fetch("/create", {
             method: "POST",
@@ -190,6 +192,7 @@ export default function Crud() {
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Category</th>
+                                <th>Description</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Image</th>
@@ -216,6 +219,11 @@ export default function Crud() {
                                     <td>
                                         <input type="text" placeholder="category"
                                                onChange={(event) => setCategory(event.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="description"
+                                               onChange={(event) => setDescription(event.target.value)}
                                         />
                                     </td>
                                     <td>

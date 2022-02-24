@@ -5,11 +5,12 @@ import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 
 export default function Cart() {
 
-    const [cartItems, setCartItems] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
     const [shippingFee, setShippingFee] = useState(0);
 
     const [showModal, setShowModal] = useState(false);
     const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState("");
 
 
     const barangays = [
@@ -315,9 +316,16 @@ export default function Cart() {
     const completePurchase = (event) => {
         event.preventDefault();
 
+        if (cartItems.length === 0) {
+            setHasError(true);
+            setError("No products in Cart");
+            setShowModal(true);
+            return;
+        }
 
         if (shippingFee === 0) {
             setHasError(true);
+            setError("Select a shipping location")
             setShowModal(true);
             return;
         }
@@ -355,7 +363,6 @@ export default function Cart() {
 
     return (
         <>
-
             <Modal show={showModal} onHide={() => setShowModal(false)} size="md"
                    aria-labelledby="contained-modal-title-vcenter"
                    centered>
@@ -395,7 +402,7 @@ export default function Cart() {
                         {hasError ?
                             (
                                 <>
-                                    Select a shipping location
+                                    <p>{error}</p>
                                 </>
                             ) : (
                                 <>

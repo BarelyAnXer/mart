@@ -1,5 +1,5 @@
 import "./Register.css"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FaFacebookF, FaGooglePlusG, FaTwitter} from "react-icons/fa";
 import logo from "../Login/images/logo.jpg";
 import {useState} from "react";
@@ -14,15 +14,28 @@ export default function Register() {
     const [address, setAddress] = useState("");
     const [accType, setAccType] = useState("Buyer");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const [show, setShow] = useState(false);
     const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     const register = (event) => {
         event.preventDefault();
 
-        if (email === "" || password === "" || address === "") {
+        if (email === "" || password === "" || address === "" || phoneNumber === "" || confirmPassword === "") {
             setHasError(true);
+            setError("Please Complete the form");
+            setShow(true);
+            return;
+        }
+
+
+        if (!(password === confirmPassword)) {
+            setHasError(true);
+            setError("password doesnt match");
             setShow(true);
             return;
         }
@@ -46,6 +59,7 @@ export default function Register() {
             } else {
                 setHasError(false);
                 setShow(true);
+
             }
         }).catch(error => {
             console.log(error)
@@ -55,7 +69,15 @@ export default function Register() {
     return (
         <>
 
-            <Modal show={show} onHide={() => setShow(false)} size="md"
+            <Modal show={show} onHide={() => {
+                setShow(false);
+
+                if (!hasError) {
+                    navigate("/login");
+                }
+
+
+            }} size="md"
                    aria-labelledby="contained-modal-title-vcenter"
                    centered>
                 <Modal.Header closeButton>
@@ -94,7 +116,7 @@ export default function Register() {
                         {hasError ?
                             (
                                 <>
-                                    Please Complete the form
+                                    <p>{error}</p>
                                 </>
                             ) : (
                                 <>
@@ -127,6 +149,11 @@ export default function Register() {
                                     <span><i className="fa fa-lock"/></span>
                                     <input type="password" placeholder="Password"
                                            onChange={(event) => setPassword(event.target.value)} required/>
+                                </div>
+                                <div className="formInput">
+                                    <span><i className="fa fa-lock"/></span>
+                                    <input type="password" placeholder="Confirm Password"
+                                           onChange={(event) => setConfirmPassword(event.target.value)} required/>
                                 </div>
 
                                 <div className="formInput">
