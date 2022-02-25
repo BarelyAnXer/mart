@@ -12,7 +12,8 @@ export default function Team() {
             <div className="container my-5">
                 <section className="team-section text-center dark-grey-text">
                     <h1 className="font-weight-bold pb-2 mb-4">Our amazing team</h1>
-                    <p className="text-muted w-responsive mx-auto mb-5">Thank you for visiting our website <br/>- from all of the developers</p>
+                    <p className="text-muted w-responsive mx-auto mb-5">Thank you for visiting our website <br/>- from
+                        all of the developers</p>
                     <div className="row text-center text-md-left">
                         <div className="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
                             <div className="avatar mb-md-0 mb-4 mx-4">
@@ -22,9 +23,7 @@ export default function Team() {
                             <div className="mx-4">
                                 <h4 className="font-weight-bold mb-3">Joemari Cabigatan</h4>
                                 <h6 className="font-weight-bold grey-text mb-3">System Analyst</h6>
-                                <p className="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                                    eos id officiis hic
-                                    tenetur.</p>
+                                <p className="grey-text"></p>
 
 
                                 <a href="https://www.facebook.com/JoemariCabingatan">
@@ -50,9 +49,7 @@ export default function Team() {
                             <div className="mx-4">
                                 <h4 className="font-weight-bold mb-3">Gleen Alom</h4>
                                 <h6 className="font-weight-bold grey-text mb-3">Software Tester</h6>
-                                <p className="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                                    eos id officiis hic
-                                    tenetur.</p>
+                                <p className="grey-text"></p>
                                 <a href="https://www.facebook.com/gleen.alom.1">
                                     <FaFacebook style={{color: "blue", margin: "20px", fontSize: "32px"}}/>
                                 </a>
@@ -70,14 +67,13 @@ export default function Team() {
                     <div className="row text-center text-md-left">
                         <div className="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
                             <div className="avatar mb-md-0 mb-4 mx-4">
-                                <img src={img3} width={700} height={250}
+                                <img src={img3} width={300} height={270}
                                      className="rounded z-depth-1 img-fluid" alt="Sample avatar"/>
                             </div>
                             <div className="mx-4">
                                 <h4 className="font-weight-bold mb-3">Aljhon Boco</h4>
                                 <h6 className="font-weight-bold grey-text mb-3">Project Manager</h6>
-                                <p className="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                                    eos id officiis hic tenetur.</p>
+                                <p className="grey-text"></p>
                                 <a href="https://www.facebook.com/aljhon.boco.7">
                                     <FaFacebook style={{color: "blue", margin: "20px", fontSize: "32px"}}/>
                                 </a>
@@ -93,15 +89,13 @@ export default function Team() {
                         </div>
                         <div className="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
                             <div className="avatar mb-md-0 mb-4 mx-4">
-                                <img src={img4} width={800} height={500}
+                                <img src={img4} width={300} height={300}
                                      className="rounded z-depth-1 img-fluid" alt="Sample avatar"/>
                             </div>
                             <div className="mx-4">
                                 <h4 className="font-weight-bold mb-3">Mart Ronnel Golocino</h4>
                                 <h6 className="font-weight-bold grey-text mb-3">UX Designer</h6>
-                                <p className="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                                    eos id officiis hic
-                                    tenetur.</p>
+                                <p className="grey-text"></p>
                                 <a href="https://www.facebook.com/martronnel.golocino.17">
                                     <FaFacebook style={{color: "blue", margin: "20px", fontSize: "32px"}}/>
                                 </a>

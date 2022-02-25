@@ -20,11 +20,11 @@ export default function Maps() {
                             </div>
                             <div className="col-10 col-md-4 mx-auto align-self-center py-4">
                                 <h6 className="font-weight-bold grey-text text-uppercase small">Head Office</h6>
-                                <h5 className="font-weight-normal mb-4">Seattle, WA</h5>
-                                <p className="text-muted font-weight-light">2651 Main Street, Suit 124<br/>Seattle, WA,
-                                    98101</p>
+                                <h5 className="font-weight-normal mb-4">CTU TUBURAN</h5>
+                                <p className="text-muted font-weight-light">2651 Main Street, Suit 124<br/>BRGY. 8 ,
+                                    TUBURAN, CEBU </p>
                                 <p className="text-muted font-weight-light mb-0">Phone: +1 987 123 6548<br/>Email:
-                                    hello@gmail</p>
+                                    Martronnel@gmail.com</p>
                             </div>
                         </div>
                     </div>

@@ -30,11 +30,9 @@ export default function Home() {
                     <div className="row">
                         <div className="col-md-6 mb-4 mb-md-0">
                             <h3 className="font-weight-bold">Competitive Pricing</h3>
-                            <p className="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam
-                                sapiente
-                                molestiae
-                                numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam, doloremque
-                                laborum.</p>
+                            <p className="text-muted">OUR SITE OFFERS THE BEST PRICES FOR THE QUALITY PRODUCTS THAT ARE
+                                OFFERED. ALL EXPENSES THAT GONNA BE MET WHEN GOING TO MARKETS ARE THOUROUGLY ANALYZED SO
+                                THAT WE CAN OUR BUYERS CAN SPEND LESSER.</p>
                             <button type="button" className="btn btn-primary">
                                 <Link to="/viewProducts" style={{
                                     color: "white",
@@ -76,11 +74,8 @@ export default function Home() {
                         </div>
                         <div className="col-md-6 mb-4 mb-md-0">
                             <h3 className="font-weight-bold">Variety of Products</h3>
-                            <p className="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam
-                                sapiente
-                                molestiae
-                                numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam, doloremque
-                                laborum.</p>
+                            <p className="text-muted">OUR SITE OFFERS VARIETY OF PRODUCTS THAT ARE SEEN ON PUBLIC
+                                MARKETS. EVERYTHING IS HERE! WE WOULD LOVE TO BE OF YOUR SERVICE.</p>
                             <button type="button" className="btn btn-primary">
                                 <Link to="/viewProducts" style={{
                                     color: "white",

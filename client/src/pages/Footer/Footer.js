@@ -11,20 +11,22 @@ export default function Footer() {
                 <footer className={styles.footerDistributed}>
                     <div className={styles.footerLeft}>
                         <img src={logo} alt=""/>
-                        <h3>Lorem<span>Ipsum</span></h3>
+                        <h3>TUBE<span>MART</span></h3>
                         <p className={styles.footerLinks}>
                             <a href="/">Home</a>|
                             <a href="/">Products</a>|
                             <a href="/">About Us</a>
                         </p>
-                        <p className={styles.footerCompanyName}>© 2021 Group/Company Name here Pvt. Ltd.</p>
+                        <p className={styles.footerCompanyName}>© 2022 BSIT-4C.</p>
                     </div>
                     <div className={styles.footerCenter}>
                         <div>
                             <i className="fa fa-map-marker"/>
                             <p>
-                                <span>GMC Plaza, M. J. Cuenco Ave. Legaspi Ext., Cebu City, 6000 Cebu </span>
-                                Lastname Firstname Mi
+                                <span>TUBURAN, CEBU
+CTU TUBURAN | BSIT-4C
+</span>
+                                {/*Lastname Firstname Mi*/}
                             </p>
                         </div>
                         <div>
@@ -33,14 +35,13 @@ export default function Footer() {
                         </div>
                         <div>
                             <i className="fa fa-envelope"/>
-                            <p><a href="/">support@company name</a></p>
+                            <p><a href="/">Martronnel@gmail.com</a></p>
                         </div>
                     </div>
                     <div className={styles.footerRight}>
                         <p className={styles.footerCompanyAbout}>
                             <span>About the company</span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                            CTU TUBURAN CAMPUS | BSIT-4C</p>
                         <div className={styles.footerIcons}>
                             <a href="/"><FaFacebook/></a>
                             <a href="/"><FaTwitter/></a>

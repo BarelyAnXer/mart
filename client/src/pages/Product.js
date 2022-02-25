@@ -7,6 +7,8 @@ function Product() {
 
     const [product, setProduct] = useState();
     const [modalShow, setModalShow] = useState(false);
+    const [availableQuantity, setAvailableQuantity] = useState(0);
+
     let navigate = useNavigate();
 
 
@@ -16,6 +18,7 @@ function Product() {
             method: "GET",
         }).then(response => response.json()).then(data => {
             console.log(data, "test");
+            setAvailableQuantity(data.quantity);
             setProduct(data)
         }).catch(error => {
             console.log(error)
@@ -71,6 +74,9 @@ function Product() {
     let [quantity, setQuantity] = useState(1);
 
     function incrementCount() {
+        if (quantity + 1 > availableQuantity) {
+            return;
+        }
         quantity = quantity + 1;
         setQuantity(quantity++);
     }
@@ -116,6 +122,7 @@ function Product() {
 
                                                             <div>
                                                                 <h4>Quantity</h4>
+                                                                <p>Available Quantity: {availableQuantity}</p>
                                                                 <div className="mx-auto d-flex">
                                                                     <button type="button"
                                                                             className="btn btn-default btn-number border"
