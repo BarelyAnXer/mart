@@ -1,6 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import CustomModal from "../Components/CustomModal";
+import {Modal} from "react-bootstrap";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 
 function Product() {
     const {id} = useParams();
@@ -8,6 +10,9 @@ function Product() {
     const [product, setProduct] = useState();
     const [modalShow, setModalShow] = useState(false);
     const [availableQuantity, setAvailableQuantity] = useState(0);
+
+    const [hasError, setHasError] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     let navigate = useNavigate();
 
@@ -30,6 +35,13 @@ function Product() {
     const addToCart = (event) => {
         event.preventDefault();
 
+        if (availableQuantity <= 0) {
+            setHasError(true);
+            setShowModal(true);
+            return;
+        }
+
+
         const user = JSON.parse(localStorage.getItem("user"));
         const uid = user._id;
 
@@ -50,6 +62,12 @@ function Product() {
 
     const buyNow = (event) => {
         event.preventDefault();
+
+        if (availableQuantity <= 0) {
+            setHasError(true);
+            setShowModal(true);
+            return;
+        }
 
         const user = JSON.parse(localStorage.getItem("user"));
         const uid = user._id;
@@ -94,6 +112,57 @@ function Product() {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
+
+
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="md"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Message
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    {hasError ?
+                        (
+                            <>
+                                <AiOutlineClose style={{
+                                    fontSize: "3rem",
+                                    color: "red"
+                                }}/>
+                            </>
+                        ) : (
+                            <>
+                                <AiOutlineCheck style={{
+                                    fontSize: "3rem",
+                                    color: "green"
+                                }}/>
+                            </>
+                        )
+                    }
+                    <p style={{
+                        fontSize: "1.5rem"
+                    }}>
+                        {hasError ?
+                            (
+                                <p>Product has no stock left</p>
+                            ) : (
+                                <>
+                                    Action Success
+                                </>
+                            )
+                        }
+                    </p>
+                </Modal.Body>
+            </Modal>
+
 
             <div>
                 {product ?

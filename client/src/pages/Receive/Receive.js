@@ -38,12 +38,6 @@ export default function Receive() {
                                 <div className="col-sm-8"><h2><b>To Receive Details</b></h2></div>
                                 <div className="col-sm-4">
 
-                                    {/*<button type="button" className="btn btn-info add-new"*/}
-                                    {/*        onClick={() => setIsAdding(!isAdding)}>*/}
-                                    {/*    Add New*/}
-                                    {/*    <FaPlus/>*/}
-                                    {/*</button>*/}
-
                                 </div>
                             </div>
                         </div>
